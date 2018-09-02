@@ -91,6 +91,7 @@ class VerifyCode extends Component {
       let codeArray = [];
       codeArray = text.split('');
       // add
+        if (this.props.onInputCompleted) { this.props.onInputCompleted(text); }
       if (codeLength > this.curCodeLength) {
         if (isNaN(codeArray[codeLength - 1]) || codeArray[codeLength - 1] === ' ') {
           // console.log('1 codeArray:', codeArray)
@@ -163,7 +164,9 @@ class VerifyCode extends Component {
 
   keyboardDidShow() {
     this.keyboardShow = true;
-    this.setState({ focused: true });
+    if(this.textInput.isFocused()) {
+        this.setState({ focused: true });
+    }
     // this.focused = false;
   }
 
